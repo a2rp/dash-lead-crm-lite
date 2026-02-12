@@ -106,7 +106,7 @@ const Header = () => {
             <Styled.Slider className={isMenuOpen ? "open" : ""}>
                 <div className="topRow">
                     <div className="title">
-                        <img src="/images/logo.png" alt="" />
+                        <img src={logo} alt="" />
                         <div className="text">dash - lead crm lite</div>
                     </div>
                     <button
