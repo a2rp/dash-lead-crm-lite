@@ -13,6 +13,7 @@ import {
     FiPlusCircle,
 } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
+import logo from "./images/logo.png";
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,7 +51,7 @@ const Header = () => {
                         className="brandLink"
                         aria-label="Go to dashboard"
                     >
-                        <img src="/images/logo.png" alt="CRM logo" />
+                        <img src={logo} alt="CRM logo" />
                         <div className="name">dash - lead crm lite</div>
                     </NavLink>
                 </Styled.Col>
