@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { FiArrowUp } from "react-icons/fi";
 import { Styled } from "./App.styled";
 import AppRoutes from "./AppRoutes";
 import Header from "./components/header";
@@ -6,35 +7,31 @@ import Footer from "./components/footer";
 import { useLocation } from "react-router-dom";
 
 const App = () => {
-    const footerRef = useRef(null);
     const mainRef = useRef(null);
-    const coverageRef = useRef(null);
-
-    const [footerHeight, setFooterHeight] = useState(0);
+    const [showTopButton, setShowTopButton] = useState(false);
 
     const location = useLocation();
 
     useEffect(() => {
-        if (!footerRef.current) return;
-
-        const updateHeight = () => {
-            const height = footerRef.current.offsetHeight;
-            setFooterHeight(height);
-        };
-
-        updateHeight();
-
-        const observer = new ResizeObserver(updateHeight);
-        observer.observe(footerRef.current);
-
-        return () => observer.disconnect();
-    }, []);
-
-    // ✅ scroll main container to top on route change
-    useEffect(() => {
         if (!mainRef.current) return;
         mainRef.current.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        setShowTopButton(false);
     }, [location.pathname]);
+
+    useEffect(() => {
+        const main = mainRef.current;
+        if (!main) return undefined;
+
+        const handleScroll = () => setShowTopButton(main.scrollTop > 320);
+        main.addEventListener("scroll", handleScroll, { passive: true });
+        handleScroll();
+
+        return () => main.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const scrollToTop = () => {
+        mainRef.current?.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    };
 
     return (
         <Styled.Wrapper>
@@ -52,6 +49,16 @@ const App = () => {
                     </div>
                 </div>
             </Styled.Main>
+
+            <Styled.TopButton
+                type="button"
+                className={showTopButton ? "visible" : ""}
+                onClick={scrollToTop}
+                aria-label="Scroll to top"
+                title="Scroll to top"
+            >
+                <FiArrowUp aria-hidden="true" />
+            </Styled.TopButton>
         </Styled.Wrapper>
     );
 };

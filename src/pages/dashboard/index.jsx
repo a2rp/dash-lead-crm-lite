@@ -273,7 +273,7 @@ const Dashboard = () => {
     const [leads, setLeads] = useState([]);
     const [settings, setSettings] = useState(() => makeDemoSettings());
     const [query, setQuery] = useState("");
-    const [refreshTick, setRefreshTick] = useState(0);
+    const [, setRefreshTick] = useState(0);
 
     useEffect(() => {
         const savedSettings = safeJsonParse(
@@ -305,7 +305,7 @@ const Dashboard = () => {
         return map;
     }, [settings]);
 
-    const stats = useMemo(() => {
+    const stats = (() => {
         const totalLeads = leads.length;
 
         const dueToday = leads.filter(
@@ -374,7 +374,7 @@ const Dashboard = () => {
             todayQueue,
             recentLeads,
         };
-    }, [leads, settings, refreshTick]);
+    })();
 
     const filteredTodayQueue = useMemo(() => {
         const q = query.trim().toLowerCase();
@@ -630,7 +630,7 @@ const Dashboard = () => {
                         </div>
                     ) : (
                         <div className="list">
-                            {filteredTodayQueue.map((l, idx) => {
+                            {filteredTodayQueue.map((l) => {
                                 const stage =
                                     stageMap[l.stage]?.label || l.stage;
                                 const badgeTone =

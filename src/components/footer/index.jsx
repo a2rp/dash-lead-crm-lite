@@ -1,6 +1,6 @@
 import React from "react";
 import { Styled } from "./styled";
-import { FiGithub, FiLinkedin, FiGlobe, FiFacebook } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiGlobe, FiFacebook, FiCode, FiYoutube, FiMail, FiHeart, FiCoffee, FiStar } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 const AppFooter = () => {
@@ -36,41 +36,30 @@ const AppFooter = () => {
                         <Styled.SectionTitle>Connect</Styled.SectionTitle>
 
                         <Styled.SocialLinks>
-                            <a
-                                href="https://github.com/a2rp"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <FiGithub />
-                            </a>
-                            <a
-                                href="https://www.ashishranjan.net"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <FiGlobe />
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/in/aashishranjan"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <FiLinkedin />
-                            </a>
-                            <a
-                                href="https://www.facebook.com/theash.ashish/"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <FiFacebook />
-                            </a>
+                            <a href="https://www.ashishranjan.net/" target="_blank" rel="noopener noreferrer" aria-label="Portfolio" title="Portfolio"><FiGlobe /></a>
+                            <a href="https://github.com/a2rp" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><FiGithub /></a>
+                            <a href="https://codepen.io/ash1198" target="_blank" rel="noopener noreferrer" aria-label="CodePen" title="CodePen"><FiCode /></a>
+                            <a href="https://www.linkedin.com/in/aashishranjan" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><FiLinkedin /></a>
+                            <a href="https://www.facebook.com/theash.ashish/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><FiFacebook /></a>
+                            <a href="https://www.youtube.com/@ashishranjan-ashz?sub_confirmation=1" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><FiYoutube /></a>
+                            <a href="mailto:ash.ranjan09@gmail.com" aria-label="Email" title="Email"><FiMail /></a>
+                            <a href="https://a2rp-donation-page.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="Support" title="Support"><FiHeart /></a>
+                            <a href="https://buymeacoffee.com/a2rp" target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee" title="Buy Me a Coffee"><FiCoffee /></a>
+                            <a href="https://www.patreon.com/a2rp" target="_blank" rel="noopener noreferrer" aria-label="Patreon" title="Patreon"><FiStar /></a>
                         </Styled.SocialLinks>
                     </Styled.SocialSection>
                 </Styled.Top>
 
                 <Styled.Bottom>
                     <Styled.Copy>
-                        © {year} Ashish Ranjan. All rights reserved.
+                        Copyright © {year}{" "}
+                        <a
+                            href="https://www.ashishranjan.net/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Ashish Ranjan
+                        </a>
                     </Styled.Copy>
 
                     <Styled.LegalLinks>

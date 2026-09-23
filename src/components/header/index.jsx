@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Styled } from "./styled";
 import {
     FiMenu,
@@ -13,7 +13,7 @@ import {
     FiPlusCircle,
 } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
-import logo from "./images/logo.png";
+const logo = `${import.meta.env.BASE_URL}logo.png`;
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,7 +51,7 @@ const Header = () => {
                         className="brandLink"
                         aria-label="Go to dashboard"
                     >
-                        <img src={logo} alt="CRM logo" />
+                        <img src={logo} alt="Dash Lead CRM logo" />
                         <div className="name">dash - lead crm lite</div>
                     </NavLink>
                 </Styled.Col>

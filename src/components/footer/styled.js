@@ -86,7 +86,8 @@ export const Styled = {
 
     SocialLinks: styled.div`
         display: flex;
-        gap: 14px;
+        flex-wrap: wrap;
+        gap: 10px;
 
         a {
             height: 38px;
