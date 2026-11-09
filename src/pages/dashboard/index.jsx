@@ -272,30 +272,47 @@ function SkeletonImage({ src, alt, seed, className }) {
 const Dashboard = () => {
     const [leads, setLeads] = useState([]);
     const [settings, setSettings] = useState(() => makeDemoSettings());
+    const [hasLoadedLocalData, setHasLoadedLocalData] = useState(false);
     const [query, setQuery] = useState("");
     const [, setRefreshTick] = useState(0);
 
     useEffect(() => {
-        const savedSettings = safeJsonParse(
-            localStorage.getItem(LS_KEYS.settings),
-            null,
-        );
-        const savedLeads = safeJsonParse(
-            localStorage.getItem(LS_KEYS.leads),
-            null,
-        );
+        try {
+            const savedSettings = safeJsonParse(
+                localStorage.getItem(LS_KEYS.settings),
+                null,
+            );
+            const savedLeads = safeJsonParse(
+                localStorage.getItem(LS_KEYS.leads),
+                null,
+            );
 
-        if (savedSettings) setSettings(savedSettings);
-        if (Array.isArray(savedLeads)) setLeads(savedLeads);
+            if (savedSettings) setSettings(savedSettings);
+            if (Array.isArray(savedLeads)) setLeads(savedLeads);
+        } catch {
+            // Keep the in-memory defaults when browser storage is unavailable.
+        } finally {
+            setHasLoadedLocalData(true);
+        }
     }, []);
 
     useEffect(() => {
-        localStorage.setItem(LS_KEYS.settings, JSON.stringify(settings));
-    }, [settings]);
+        if (!hasLoadedLocalData) return;
+        try {
+            localStorage.setItem(LS_KEYS.settings, JSON.stringify(settings));
+        } catch {
+            // Keep the dashboard usable if browser storage is full or blocked.
+        }
+    }, [settings, hasLoadedLocalData]);
 
     useEffect(() => {
-        localStorage.setItem(LS_KEYS.leads, JSON.stringify(leads));
-    }, [leads]);
+        if (!hasLoadedLocalData) return;
+        try {
+            localStorage.setItem(LS_KEYS.leads, JSON.stringify(leads));
+        } catch {
+            // Keep the dashboard usable if browser storage is full or blocked.
+        }
+    }, [leads, hasLoadedLocalData]);
 
     const stageMap = useMemo(() => {
         const map = {};
@@ -397,8 +414,17 @@ const Dashboard = () => {
     };
 
     const clearAll = () => {
-        localStorage.removeItem(LS_KEYS.leads);
-        localStorage.removeItem(LS_KEYS.settings);
+        const confirmed = window.confirm(
+            "Reset local data? This will permanently clear saved leads and settings from this browser.",
+        );
+        if (!confirmed) return;
+
+        try {
+            localStorage.removeItem(LS_KEYS.leads);
+            localStorage.removeItem(LS_KEYS.settings);
+        } catch {
+            // Reset the current view even when browser storage is unavailable.
+        }
         setLeads([]);
         setSettings(makeDemoSettings());
         setRefreshTick((v) => v + 1);

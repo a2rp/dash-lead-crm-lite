@@ -1,14 +1,15 @@
 {
-    "name": "frontend",
+    "name": "dash-lead-crm-lite",
     "private": true,
-    "version": "0.0.0",
+    "version": "1.0.0",
+    "description": "A browser-based lead CRM dashboard with pipeline and follow-up management.",
     "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
         "lint": "eslint .",
         "preview": "vite preview",
-        "predeploy": "npm run build && copy dist\\index.html dist\\404.html",
+        "predeploy": "npm run build && node scripts/copy-spa-fallback.mjs",
         "deploy": "npx --yes gh-pages -d dist -b gh-pages"
     },
     "dependencies": {
@@ -18,7 +19,7 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-icons": "^5.5.0",
-        "react-router-dom": "6.20.1",
+        "react-router-dom": "6.30.6",
         "styled-components": "^6.1.18"
     },
     "devDependencies": {

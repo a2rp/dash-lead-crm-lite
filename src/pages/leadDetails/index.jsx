@@ -63,8 +63,12 @@ const LeadDetails = () => {
     const [note, setNote] = useState("");
 
     useEffect(() => {
-        const saved = JSON.parse(localStorage.getItem(LS_KEY) || "[]");
-        setLeads(saved);
+        try {
+            const saved = JSON.parse(localStorage.getItem(LS_KEY) || "[]");
+            setLeads(Array.isArray(saved) ? saved : []);
+        } catch {
+            setLeads([]);
+        }
     }, []);
 
     const lead = useMemo(() => {

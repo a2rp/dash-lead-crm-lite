@@ -9,7 +9,8 @@ A frontend-only React CRM workspace for tracking leads, managing pipeline stages
 - Dashboard with daily priorities and pipeline metrics
 - Searchable leads with filters, sorting, details, and timeline events
 - Pipeline stage board with follow-up planning
-- Local export/import tools and configurable settings
+- Configurable pipeline stages, owners, and lead sources
+- Demo data tools for exploring the workspace
 - Responsive layout with keyboard-friendly navigation
 
 ## Tech stack
@@ -18,7 +19,15 @@ React, Vite, React Router, styled-components, Material UI, and React Icons.
 
 ## Run locally
 
-Run npm install, then npm run dev. Use npm run build to create a production build and npm run preview to preview it.
+Run `npm install`, then `npm run dev`. Use `npm run build` to create a production build and `npm run preview` to preview it.
+
+## Data storage
+
+Lead records and workspace settings are saved in this browser with `localStorage`. They do not sync between browsers or devices. Clearing this site's browser data removes the saved workspace.
+
+## Deploy
+
+Run `npm run deploy` to build the app, create the GitHub Pages fallback page, and publish the `dist` folder to the `gh-pages` branch.
 
 ## Links
 
